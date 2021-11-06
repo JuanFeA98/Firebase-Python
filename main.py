@@ -25,10 +25,10 @@ data = {
 }
 
 # Agregamos un documento a nuestra colleción
-# db.collection('persons').add(data)
+db.collection('persons').add(data)
 
 # Establecer el ID del documento
-# db.collection('persons').document(username).set(data)
+db.collection('persons').document(username).set(data)
 
 # Agregar un campo adicional
 db.collection('persons').document(username).set({'address':'Bogotá'}, merge=True)
