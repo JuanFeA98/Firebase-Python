@@ -38,15 +38,3 @@ db.collection('persons').document(username).set({'address':'Bogotá'}, merge=Tru
 # Crear una subcolección
 db.collection('persons').document(username).collection('books').add({'title':'Caballo de Troya'})
 
-
-
-# Read DATA
-
-# Traer un documento por su ID
-result = db.collection('persons').document('Sandra123').get()
-
-
-
-
-
-
