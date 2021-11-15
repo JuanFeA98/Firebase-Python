@@ -1,0 +1,1 @@
+{"id":"65aed7df-53e5-4728-b4fa-6a162ae72031","space":11555,"runtime":"python3.9","name":"fastapideta","path":"tf1btq","project":"b0jtn76s","account":"144798365827","region":"sa-east-1","deps":["fastapi","firebase_admin"],"envs":null,"public":true,"log_level":"debug","cron":""}
