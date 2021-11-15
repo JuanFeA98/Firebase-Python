@@ -13,29 +13,26 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # Cargamos nuestro dataset
-# df = pd.read_csv('https://gist.githubusercontent.com/JuanFeA98/ce470cf42a2b4449a314adef81211bf5/raw/d014b5d9cd080d99af363c2e511e16a84fc92cf3/CSS_colors.csv')
-df = pd.read_csv('https://gist.githubusercontent.com/JuanFeA98/0bfa884584ec80d241bf28d02eab0fdf/raw/d269b98814a4393b19673b5c56210e699223c926/titanic.csv')
-# print(len(df))
+df = pd.read_csv('../Data/titanic.csv')
+df = df.fillna(0)
 
-# data = dict(df.iloc[0])
-# data = (list(data.values()))
-# data = data['PassengerId', 'Survived']
-# print(data)
-# db.collection('titanic').document(f'color_{1}').set(data)
+for i in range(len(df)):
+    pre_data = dict(df.iloc[i])
 
-for i in range(10):
-    data = dict(df.iloc[i])
-    print(data)
-    # print(data['PassengerId'])
-    db.collection('titanic').document(f'CODE_{data["PassengerId"]}').set(data)
+    data = {
+        'PassengerId': int(pre_data['PassengerId']),
+        'Survived': int(pre_data['Survived']),
+        'Pclass': int(pre_data['Pclass']),
+        'Name': str(pre_data['Name']),
+        'Sex': str(pre_data['Sex']), 
+        'Age': float(pre_data['Age']),
+        'SibSp': int(pre_data['SibSp']),
+        'Parch': int(pre_data['Parch']),
+        'Ticket': str(pre_data['Ticket']),
+        'Fare': float(pre_data['Fare']),
+        'Cabin':str(pre_data['Cabin']),
+        'Embarked': str(pre_data['Embarked'])
+    }
 
 
-
-# Imprimir la primera fila del dataset
-# for i in range(1):
-#     print(i)
-#     data = dict(df.iloc[i])
-#     print(data)
-#     db.collection('titanic').add(data)
-
-    # db.collection('titanic').document(1).set(data)
+    db.collection('titanic').document(f'{int(pre_data["PassengerId"])}').set(data)
