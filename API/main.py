@@ -11,13 +11,7 @@ firebase_admin.initialize_app(cred)
 # Creamos una referencia a nuestra base de datos
 db = firestore.client()
 
-docs = db.collection('colors2').get()
-# print(len(docs))
-# print(docs[1].to_dict())
-a = []
-for i in range(len(docs)):
-    a.append(docs[i].to_dict())
-
+docs = db.collection('titanic').get()
 
 # Inicializamos nuestra app
 app = FastAPI()
@@ -26,12 +20,19 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/colores")
-async def get_colores():
+@app.get("/pasajeros")
+async def get_pasajeros():
+    a = []
+    for i in range(len(docs)):
+        print(docs[i].id)
+        a.append((docs[i].to_dict()))
+
     return a
 
-@app.get("/colores/{id}")
+@app.get("/pasajeros/{id}")
 async def get_color(id):
-    result = db.collection('colors2').document(id).get()
 
-    return result.to_dict()
+    result = db.collection('titanic').where('PassengerId', '==', int(id)).get()
+    result = list(result)[0].to_dict() 
+
+    return result
