@@ -3,6 +3,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 # Conectamos con nuestra base de datos
 cred = credentials.Certificate("serviceAccountKey.json")
@@ -16,6 +17,13 @@ docs = db.collection('titanic').get()
 # Inicializamos nuestra app
 app = FastAPI()
 
+# Configuración de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*']
+)
+
+# Routes
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
